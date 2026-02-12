@@ -1,0 +1,36 @@
+.list-products {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__search {
+    flex: 1;
+    background-color: aqua;
+  }
+
+  &__add {
+    flex-shrink: 0;
+    background-color: red;
+  }
+
+  &__table {
+    width: 100%;
+    background-color: green;
+  }
+
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    background-color: blue;
+    height: 40px;
+  }
+}
