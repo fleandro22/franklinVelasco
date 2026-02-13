@@ -9,26 +9,54 @@
   </div>
 
   <div class="list-products__table">
-    <table>
-      <thead>
-        <tr>
-          <th>Logo</th>
-          <th>Nombre de producto</th>
-          <th>Descripción</th>
-          <th>Fecha de libreacion</th>
-          <th>Fecha de restructuracion</th>
-        </tr>
-      </thead>
-    </table>
+    @if (productService.$listProductsResource.isLoading()) {
+      <p>Cargando productos...</p>
+    } @else if (productService.$listProductsResource.error()) {
+      <p>Error al cargar los productos</p>
+    } @else if (productService.$listProductsResource.hasValue()) {
+      <table>
+        <thead>
+          <tr>
+            <th>Logo</th>
+            <th>Nombre de producto</th>
+            <th>Descripción</th>
+            <th>Fecha de liberación</th>
+            <th>Fecha de restructuración</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of $products(); track product.id) {
+            <tr>
+              <td>
+                <img [src]="product.logo" [alt]="product.name" width="40" height="40" />
+              </td>
+              <td>{{ product?.name }}</td>
+              <td>{{ product?.description }}</td>
+              <td>{{ product?.date_release }}</td>
+              <td>{{ product?.date_revision }}</td>
+              <td>
+                <button>Editar</button>
+                <button>Eliminar</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6">No hay productos</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
 
     <div class="list-products__pagination">
-      <span>de 100 resultados</span>
+      @if (productService.$listProductsResource.hasValue()) {
+        <span>{{ $products().length }} Resultados</span>
+      }
       <select>
+        <option value="5">5</option>
         <option value="10">10</option>
         <option value="20">20</option>
-        <option value="30">30</option>
-        <option value="40">40</option>
-        <option value="50">50</option>
       </select>
     </div>
   </div>
