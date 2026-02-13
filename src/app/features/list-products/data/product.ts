@@ -15,7 +15,6 @@ const API_URL = '/api/bp/products';
 @Injectable({
   providedIn: 'root',
 })
-
 export class ProductService {
   readonly $listProductsResource = httpResource<Product[]>(() => API_URL);
 }
